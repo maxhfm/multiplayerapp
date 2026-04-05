@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: wordpress-route
+  labels:
+    app: wordpress
+spec:
+  # host: wordpress.apps.seu-cluster.com
+  # Deixe comentado para o OpenShift gerar automaticamente o hostname.
+  to:
+    kind: Service
+    name: wordpress-svc
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
